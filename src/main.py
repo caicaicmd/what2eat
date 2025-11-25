@@ -2,8 +2,16 @@
 from fastapi import FastAPI, Response, Depends
 
 from src.core.config import Settings, get_settings
+from src.core.exception import register_exception_handlers
+from src.lifespan import lifespan
 
-app = FastAPI(description="FastAPI 练习项目实战")
+app = FastAPI(
+    app_name=Settings.app_name,
+    version="0.1.1",
+    description="FastAPI 练习项目实战",
+    lifespan=lifespan)
+
+register_exception_handlers(app)
 
 
 # 路由引入
